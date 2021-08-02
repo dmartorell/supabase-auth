@@ -9,7 +9,7 @@ import TextField from '@material-ui/core/TextField';
 import AssignmentIndOutlinedIcon from '@material-ui/icons/AssignmentIndOutlined'; import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import TransitionModal from './Modal';
+// import TransitionModal from './Modal';
 import { signUp } from '../services/supabase';
 
 const useStyles = makeStyles((theme) => ({
@@ -62,7 +62,10 @@ export default function SignUp() {
             name="email"
             autoComplete="email"
             autoFocus
-            onChange={({ target }) => setEmail(target.value)}
+            onChange={({ target }) => {
+              setEmail(target.value);
+              setMessage('');
+            }}
           />
           <TextField
             variant="outlined"
@@ -74,7 +77,10 @@ export default function SignUp() {
             type="password"
             id="password"
             autoComplete="current-password"
-            onChange={({ target }) => setPassword(target.value)}
+            onChange={({ target }) => {
+              setPassword(target.value);
+              setMessage('');
+            }}
 
           />
           <Button
@@ -88,14 +94,25 @@ export default function SignUp() {
           </Button>
           <Box mt={2}>
             <Grid item xs>
-              <Link to="auth" variant="body2">
+              <Link to="auth">
                 Back to Sign In
               </Link>
             </Grid>
           </Box>
         </form>
+        { message && (
+        <Box mt={4}>
+          <Grid item>
+            <Typography variant="subtitle2" color="secondary">
+              {message}
+            </Typography>
+          </Grid>
+        </Box>
+        )}
+
       </div>
-      <TransitionModal open={open} setOpen={setOpen} message={message} />
+
+      {/* <TransitionModal open={open} setOpen={setOpen} message={message} /> */}
     </Container>
   );
 }
