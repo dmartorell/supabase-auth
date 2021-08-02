@@ -19,7 +19,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function TransitionsModal({ open, setOpen, message }) {
+export default function TransitionsModal({
+  open, setOpen, message, setMessage,
+}) {
   const classes = useStyles();
 
   return (
@@ -29,7 +31,10 @@ export default function TransitionsModal({ open, setOpen, message }) {
         aria-describedby="transition-modal-description"
         className={classes.modal}
         open={open}
-        onClose={() => setOpen(false)}
+        onClose={() => {
+          setOpen(false);
+          setMessage('');
+        }}
         closeAfterTransition
         BackdropComponent={Backdrop}
         BackdropProps={{
@@ -38,7 +43,7 @@ export default function TransitionsModal({ open, setOpen, message }) {
       >
         <Fade in={open}>
           <div className={classes.paper}>
-            <h3>Houston...</h3>
+            <h3>Account created successfully!</h3>
             <p>{message}</p>
           </div>
         </Fade>

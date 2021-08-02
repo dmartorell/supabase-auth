@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+/* eslint-disable react/prop-types */
+import React from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -10,6 +11,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import ErrorMessage from './ErrorMessage';
 import { logIn } from '../services/supabase';
 
 function LinkToGitHub() {
@@ -40,9 +42,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+export default function SignIn({
+  setEmail,
+  setMessage,
+  setPassword,
+  message,
+  email,
+  password,
+}) {
   const classes = useStyles();
   const history = useHistory();
 
@@ -71,7 +78,10 @@ export default function SignIn() {
             name="email"
             autoComplete="email"
             autoFocus
-            onChange={({ target }) => setEmail(target.value)}
+            onChange={({ target }) => {
+              setEmail(target.value);
+              setMessage('');
+            }}
           />
           <TextField
             variant="outlined"
@@ -83,7 +93,10 @@ export default function SignIn() {
             type="password"
             id="password"
             autoComplete="current-password"
-            onChange={({ target }) => setPassword(target.value)}
+            onChange={({ target }) => {
+              setPassword(target.value);
+              setMessage('');
+            }}
 
           />
           {/* <FormControlLabel
@@ -95,14 +108,14 @@ export default function SignIn() {
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick={() => logIn(email, password, history)}
+            onClick={() => logIn(email, password, setMessage, history, setEmail, setPassword)}
           >
             Sign In
           </Button>
           <Box mt={2}>
             <Grid container>
               <Grid item xs>
-                <Link href="/" variant="body2">
+                <Link to="/" variant="body2">
                   Forgot password?
                 </Link>
               </Grid>
@@ -114,6 +127,9 @@ export default function SignIn() {
             </Grid>
           </Box>
         </form>
+        {
+        message && <ErrorMessage message={message} />
+        }
       </div>
       <Box mt={8}>
         <LinkToGitHub />

@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 import WithAuth from './WithAuth';
 import { supabase } from '../supabaseClient';
+// import ErrorMesage from './ErrorMessage';
 
 const Home = () => {
   const history = useHistory();
@@ -28,6 +29,7 @@ const Home = () => {
       </p>
       <br />
       <button type="button" onClick={logOut}>LOG OUT</button>
+      {/* <ErrorMessage message={message} /> */}
     </div>
   );
 };

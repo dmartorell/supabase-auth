@@ -1,20 +1,56 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   BrowserRouter, Switch, Route, Redirect,
 } from 'react-router-dom';
 import Home from './components/Home';
-import Auth from './components/Auth';
 import SignUp from './components/SignUp';
+import SignIn from './components/SignIn';
 
-const App = () => (
-  <BrowserRouter>
-    <Switch>
-      <Route exact path="/home" component={Home} />
-      <Route exact path="/auth" component={Auth} />
-      <Route exact path="/signup" component={SignUp} />
-      <Redirect path="/" to="/home" />
-    </Switch>
-  </BrowserRouter>
+const App = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('default'); // I need a string to avoid auto-send magic link when no password is typed.
+  const [message, setMessage] = useState('');
+  const [open, setOpen] = useState(false);
+  return (
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/home">
+          <Home setPassword={setPassword} setEmail={setEmail} />
+        </Route>
+        <Route
+          exact
+          path="/auth"
+        >
+          <SignIn
+            email={email}
+            setEmail={setEmail}
+            password={password}
+            setPassword={setPassword}
+            message={message}
+            setMessage={setMessage}
+            open={open}
+            setOpen={setOpen}
+          />
+        </Route>
+        <Route
+          exact
+          path="/signup"
+        >
+          <SignUp
+            email={email}
+            setEmail={setEmail}
+            password={password}
+            setPassword={setPassword}
+            message={message}
+            setMessage={setMessage}
+            open={open}
+            setOpen={setOpen}
+          />
+        </Route>
+        <Redirect path="/" to="/home" />
+      </Switch>
+    </BrowserRouter>
 
-);
+  );
+};
 export default App;

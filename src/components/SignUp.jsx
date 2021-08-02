@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+/* eslint-disable react/prop-types */
+import React from 'react';
 import { Link } from 'react-router-dom';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -6,11 +7,13 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import TextField from '@material-ui/core/TextField';
-import AssignmentIndOutlinedIcon from '@material-ui/icons/AssignmentIndOutlined'; import Typography from '@material-ui/core/Typography';
+import AssignmentIndOutlinedIcon from '@material-ui/icons/AssignmentIndOutlined';
+import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-// import TransitionModal from './Modal';
+import TransitionModal from './Modal';
 import { signUp } from '../services/supabase';
+import ErrorMessage from './ErrorMessage';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -27,14 +30,25 @@ const useStyles = makeStyles((theme) => ({
     width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
+  messageAvatar: {
+    margin: theme.spacing(1),
+  },
+  message: {
+    display: 'flex',
+    alignItems: 'center',
+  },
 }));
 
-export default function SignUp() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [message, setMessage] = useState('');
-  const [open, setOpen] = useState(false);
-
+export default function SignUp({
+  setEmail,
+  setMessage,
+  setPassword,
+  message,
+  email,
+  password,
+  setOpen,
+  open,
+}) {
   const classes = useStyles();
 
   return (
@@ -88,7 +102,10 @@ export default function SignUp() {
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick={() => signUp(email, password, setOpen, setMessage)}
+            onClick={() => {
+              signUp(email, password, setOpen, setMessage);
+              setPassword('default');
+            }}
           >
             Sign up
           </Button>
@@ -100,19 +117,14 @@ export default function SignUp() {
             </Grid>
           </Box>
         </form>
-        { message && (
-        <Box mt={4}>
-          <Grid item>
-            <Typography variant="subtitle2" color="secondary">
-              {message}
-            </Typography>
-          </Grid>
-        </Box>
-        )}
-
+        {
+        !open && message
+          ? <ErrorMessage message={message} />
+          : null
+        }
       </div>
 
-      {/* <TransitionModal open={open} setOpen={setOpen} message={message} /> */}
+      <TransitionModal open={open} setOpen={setOpen} message={message} setMessage={setMessage} />
     </Container>
   );
 }

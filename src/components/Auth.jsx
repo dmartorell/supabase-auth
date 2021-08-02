@@ -1,11 +1,11 @@
-import React from 'react';
-import SignIn from './SignIn';
+// import React from 'react';
+// import SignIn from './SignIn';
 
-const Auth = () => (
-  <div>
-    <SignIn />
-  </div>
+// const Auth = () => (
+//   <div>
+//     <SignIn />
+//   </div>
 
-);
+// );
 
-export default Auth;
+// export default Auth;
