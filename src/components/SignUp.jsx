@@ -4,10 +4,12 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
 import TextField from '@material-ui/core/TextField';
 import AssignmentIndOutlinedIcon from '@material-ui/icons/AssignmentIndOutlined'; import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import TransitionModal from './Modal';
 import { signUp } from '../services/supabase';
 
 const useStyles = makeStyles((theme) => ({
@@ -30,6 +32,9 @@ const useStyles = makeStyles((theme) => ({
 export default function SignUp() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [message, setMessage] = useState('');
+  const [open, setOpen] = useState(false);
+
   const classes = useStyles();
 
   return (
@@ -77,17 +82,20 @@ export default function SignUp() {
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick={() => signUp(email, password)}
+            onClick={() => signUp(email, password, setOpen, setMessage)}
           >
             Sign up
           </Button>
-          <Grid item xs>
-            <Link to="auth" variant="body2">
-              Back to Sign In
-            </Link>
-          </Grid>
+          <Box mt={2}>
+            <Grid item xs>
+              <Link to="auth" variant="body2">
+                Back to Sign In
+              </Link>
+            </Grid>
+          </Box>
         </form>
       </div>
+      <TransitionModal open={open} setOpen={setOpen} message={message} />
     </Container>
   );
 }

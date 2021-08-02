@@ -12,11 +12,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { logIn } from '../services/supabase';
 
-function Copyright() {
+function LinkToGitHub() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Authorization with Supabase || Check code at '}
-      <Link color="inherit" href="https://github.com/dmartorell/supabase-auth">
+      <Link color="inherit" to="https://github.com/dmartorell/supabase-auth">
         GitHub
       </Link>
     </Typography>
@@ -99,22 +99,24 @@ export default function SignIn() {
           >
             Sign In
           </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link href="/" variant="body2">
-                Forgot password?
-              </Link>
+          <Box mt={2}>
+            <Grid container>
+              <Grid item xs>
+                <Link href="/" variant="body2">
+                  Forgot password?
+                </Link>
+              </Grid>
+              <Grid item>
+                <Link to="/signup" variant="body2">
+                  Don&apos;t have an account? Sign Up
+                </Link>
+              </Grid>
             </Grid>
-            <Grid item>
-              <Link to="/signup" variant="body2">
-                Don&apos;t have an account? Sign Up
-              </Link>
-            </Grid>
-          </Grid>
+          </Box>
         </form>
       </div>
       <Box mt={8}>
-        <Copyright />
+        <LinkToGitHub />
       </Box>
     </Container>
   );

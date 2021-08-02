@@ -13,12 +13,13 @@ export const logIn = async (email, password, history) => {
   }
 };
 
-export const signUp = async (email, password) => {
+export const signUp = async (email, password, setOpen, setMessage) => {
   try {
     const { error } = await supabase.auth.signUp({ email, password });
     if (error) throw error;
     alert('You Signed up!');
   } catch (err) {
-    alert(err.message);
+    setMessage(err.message);
+    setOpen(true);
   }
 };
