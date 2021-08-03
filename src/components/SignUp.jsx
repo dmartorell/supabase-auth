@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -48,8 +48,14 @@ export default function SignUp({
   password,
   setOpen,
   open,
+  match,
 }) {
   const classes = useStyles();
+  console.log(match);
+
+  useEffect(() => {
+    setMessage('');
+  }, []);
 
   return (
     <Container component="main" maxWidth="xs">
@@ -124,7 +130,7 @@ export default function SignUp({
         }
       </div>
 
-      <TransitionModal open={open} setOpen={setOpen} message={message} setMessage={setMessage} />
+      <TransitionModal open={open} setOpen={setOpen} message={message} setMessage={setMessage} title="Account created successfully!" />
     </Container>
   );
 }

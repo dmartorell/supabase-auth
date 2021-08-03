@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function TransitionsModal({
-  open, setOpen, message, setMessage,
+  open, setOpen, message, setMessage, title,
 }) {
   const classes = useStyles();
 
@@ -43,7 +43,7 @@ export default function TransitionsModal({
       >
         <Fade in={open}>
           <div className={classes.paper}>
-            <h3>Account created successfully!</h3>
+            <h3>{title}</h3>
             <p>{message}</p>
           </div>
         </Fade>

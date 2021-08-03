@@ -5,12 +5,14 @@ import {
 import Dashboard from './components/Dashboard';
 import SignUp from './components/SignUp';
 import SignIn from './components/SignIn';
+import RecoverPassword from './components/RecoverPassword';
 
 const App = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('default'); // I need a string to avoid auto-send magic link when no password is typed.
   const [message, setMessage] = useState('');
   const [open, setOpen] = useState(false);
+
   return (
     <BrowserRouter>
       <Switch>
@@ -41,6 +43,16 @@ const App = () => {
             setEmail={setEmail}
             password={password}
             setPassword={setPassword}
+            message={message}
+            setMessage={setMessage}
+            open={open}
+            setOpen={setOpen}
+          />
+        </Route>
+        <Route exact path="/recover">
+          <RecoverPassword
+            email={email}
+            setEmail={setEmail}
             message={message}
             setMessage={setMessage}
             open={open}

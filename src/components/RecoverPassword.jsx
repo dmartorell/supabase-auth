@@ -1,29 +1,20 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect } from 'react';
-import { useHistory, Link } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import Icon from '@material-ui/core/Icon';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import TransitionModal from './Modal';
 import ErrorMessage from './ErrorMessage';
-import { logIn } from '../services/supabase';
+import { recoverPassword } from '../services/supabase';
 
-function LinkToGitHub() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Authorization with Supabase || Check code at '}
-      <Link color="inherit" to="https://github.com/dmartorell/supabase-auth">
-        GitHub
-      </Link>
-    </Typography>
-  );
-}
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(18),
@@ -41,30 +32,26 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn({
+export default function RecoverPassword({
   setEmail,
   setMessage,
-  setPassword,
   message,
   email,
-  password,
+  setOpen,
+  open,
 }) {
   const classes = useStyles();
-  const history = useHistory();
-
-  useEffect(() => {
-    setMessage('');
-  }, []);
+  // const history = useHistory();
 
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
+          <Icon>password</Icon>
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign In
+          Password Recovery
         </Typography>
         <form
           className={classes.form}
@@ -86,57 +73,33 @@ export default function SignIn({
               setMessage('');
             }}
           />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            onChange={({ target }) => {
-              setPassword(target.value);
-              setMessage('');
-            }}
 
-          />
-          {/* <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          /> */}
           <Button
             fullWidth
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick={() => logIn(email, password, setMessage, history, setEmail, setPassword)}
+            onClick={() => recoverPassword(email, setOpen, setMessage)}
           >
-            Sign In
+            Get new password
           </Button>
           <Box mt={2}>
-            <Grid container>
-              <Grid item xs>
-                <Link to="/recover" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link to="/signup" variant="body2">
-                  Don&apos;t have an account? Sign Up
-                </Link>
-              </Grid>
+            <Grid item xs>
+              <Link to="auth">
+                Back to Sign In
+              </Link>
             </Grid>
           </Box>
+
         </form>
         {
-        message && <ErrorMessage message={message} />
+        !open && message
+          ? <ErrorMessage message={message} />
+          : null
         }
       </div>
-      <Box mt={8}>
-        <LinkToGitHub />
-      </Box>
+
+      <TransitionModal open={open} setOpen={setOpen} message={message} setMessage={setMessage} title="One more step" />
     </Container>
   );
 }
