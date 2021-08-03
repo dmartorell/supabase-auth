@@ -48,10 +48,8 @@ export default function SignUp({
   password,
   setOpen,
   open,
-  match,
 }) {
   const classes = useStyles();
-  console.log(match);
 
   useEffect(() => {
     setMessage('');
@@ -130,7 +128,7 @@ export default function SignUp({
         }
       </div>
 
-      <TransitionModal open={open} setOpen={setOpen} message={message} setMessage={setMessage} title="Account created successfully!" />
+      <TransitionModal open={open} setOpen={setOpen} message={message} setMessage={setMessage} title="Account created successfully!" redirect="/dashboard" />
     </Container>
   );
 }

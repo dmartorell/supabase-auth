@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -24,6 +24,7 @@ function LinkToGitHub() {
     </Typography>
   );
 }
+
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(18),
@@ -51,10 +52,6 @@ export default function SignIn({
 }) {
   const classes = useStyles();
   const history = useHistory();
-
-  useEffect(() => {
-    setMessage('');
-  }, []);
 
   return (
     <Container component="main" maxWidth="xs">
@@ -118,8 +115,8 @@ export default function SignIn({
           <Box mt={2}>
             <Grid container>
               <Grid item xs>
-                <Link to="/recover" variant="body2">
-                  Forgot password?
+                <Link to="/" variant="body2">
+                  {' '}
                 </Link>
               </Grid>
               <Grid item>

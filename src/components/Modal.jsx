@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
@@ -20,9 +21,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function TransitionsModal({
-  open, setOpen, message, setMessage, title,
+  open, setOpen, message, setMessage, title, redirect = null,
 }) {
   const classes = useStyles();
+  const history = useHistory();
 
   return (
     <div>
@@ -34,6 +36,9 @@ export default function TransitionsModal({
         onClose={() => {
           setOpen(false);
           setMessage('');
+          if (redirect) {
+            history.push(`${redirect}`);
+          }
         }}
         closeAfterTransition
         BackdropComponent={Backdrop}
