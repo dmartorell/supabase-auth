@@ -5,7 +5,6 @@ import {
 import Dashboard from './components/Dashboard';
 import SignUp from './components/SignUp';
 import SignIn from './components/SignIn';
-import RecoverPassword from './components/RecoverPassword';
 
 const App = () => {
   const [email, setEmail] = useState('');
@@ -43,16 +42,6 @@ const App = () => {
             setEmail={setEmail}
             password={password}
             setPassword={setPassword}
-            message={message}
-            setMessage={setMessage}
-            open={open}
-            setOpen={setOpen}
-          />
-        </Route>
-        <Route exact path="/recover">
-          <RecoverPassword
-            email={email}
-            setEmail={setEmail}
             message={message}
             setMessage={setMessage}
             open={open}
