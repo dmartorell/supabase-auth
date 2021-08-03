@@ -16,7 +16,7 @@ const App = () => {
     <BrowserRouter>
       <Switch>
         <Route exact path="/dashboard">
-          <Dashboard setPassword={setPassword} setEmail={setEmail} />
+          <Dashboard name="Pepito" setPassword={setPassword} setEmail={setEmail} data="USUARIO" />
         </Route>
         <Route
           exact
