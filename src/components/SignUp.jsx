@@ -114,8 +114,8 @@ export default function SignUp({
             Sign up
           </Button>
           <Box mt={2}>
-            <Grid item xs>
-              <Link to="auth">
+            <Grid item xs className="linkTo">
+              <Link to="/auth">
                 Back to Sign In
               </Link>
             </Grid>

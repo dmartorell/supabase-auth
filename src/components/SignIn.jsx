@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -52,6 +52,10 @@ export default function SignIn({
 }) {
   const classes = useStyles();
   const history = useHistory();
+
+  useEffect(() => {
+    setMessage('');
+  }, []);
 
   return (
     <Container component="main" maxWidth="xs">
@@ -119,7 +123,7 @@ export default function SignIn({
                   {' '}
                 </Link>
               </Grid>
-              <Grid item>
+              <Grid item className="linkTo">
                 <Link to="/signup" variant="body2">
                   Don&apos;t have an account? Sign Up
                 </Link>

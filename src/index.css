@@ -14,3 +14,9 @@ a {
     color: inherit; 
     cursor: pointer;
 }
+.linkTo {
+     color: grey;
+}
+.linkTo:hover {
+     color: black;
+}
