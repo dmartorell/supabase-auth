@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {
   BrowserRouter, Switch, Route, Redirect,
 } from 'react-router-dom';
-import Home from './components/Home';
+import Dashboard from './components/Dashboard';
 import SignUp from './components/SignUp';
 import SignIn from './components/SignIn';
 
@@ -14,8 +14,8 @@ const App = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/home">
-          <Home setPassword={setPassword} setEmail={setEmail} />
+        <Route exact path="/dashboard">
+          <Dashboard setPassword={setPassword} setEmail={setEmail} />
         </Route>
         <Route
           exact
@@ -47,7 +47,7 @@ const App = () => {
             setOpen={setOpen}
           />
         </Route>
-        <Redirect path="/" to="/home" />
+        <Redirect path="/" to="/dashboard" />
       </Switch>
     </BrowserRouter>
 

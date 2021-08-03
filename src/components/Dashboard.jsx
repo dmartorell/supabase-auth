@@ -5,7 +5,7 @@ import WithAuth from './WithAuth';
 import { supabase } from '../supabaseClient';
 // import ErrorMesage from './ErrorMessage';
 
-const Home = () => {
+const Dashboard = () => {
   const history = useHistory();
   const [userInfo] = useState(JSON.parse(localStorage.getItem('supabase.auth.token')));
 
@@ -21,7 +21,7 @@ const Home = () => {
 
   return (
     <div>
-      <h2>HOME PAGE</h2>
+      <h2>DASHBOARD</h2>
       <p>
         Hello,
         {' '}
@@ -33,4 +33,4 @@ const Home = () => {
     </div>
   );
 };
-export default WithAuth(Home);
+export default WithAuth(Dashboard);
