@@ -9,7 +9,6 @@ export const logIn = async (email, password, setMessage, history, setEmail, setP
     if (error) throw error;
     setEmail('');
     setPassword('default');
-    history.push('/home');
   } catch (err) {
     setMessage(err.message);
   }

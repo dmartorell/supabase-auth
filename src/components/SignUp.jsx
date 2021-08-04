@@ -130,7 +130,7 @@ export default function SignUp({
         }
       </div>
 
-      <TransitionModal open={open} setOpen={setOpen} message={message} setMessage={setMessage} title="Account created successfully!" redirect="/dashboard" />
+      <TransitionModal open={open} setOpen={setOpen} message={message} setMessage={setMessage} title="Account created successfully!" />
     </Container>
   );
 }

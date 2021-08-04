@@ -1,13 +1,11 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router';
-import WithAuth from './WithAuth';
 import { supabase } from '../supabaseClient';
 // import ErrorMesage from './ErrorMessage';
 
-const Dashboard = () => {
+const Dashboard = ({ session }) => {
   const history = useHistory();
-  const [userInfo] = useState(JSON.parse(localStorage.getItem('supabase.auth.token')));
 
   const logOut = async () => {
     try {
@@ -25,12 +23,11 @@ const Dashboard = () => {
       <p>
         Hello,
         {' '}
-        {userInfo.currentSession.user.email || 'Couldn\'t find user info'}
+        {session.user.email || 'Couldn\'t find user info'}
       </p>
       <br />
       <button type="button" onClick={logOut}>LOG OUT</button>
-      {/* <ErrorMessage message={message} /> */}
     </div>
   );
 };
-export default WithAuth(Dashboard);
+export default Dashboard;
