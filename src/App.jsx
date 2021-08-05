@@ -28,7 +28,6 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    console.log('session changed');
     if (session) {
       setLoading(false);
     }

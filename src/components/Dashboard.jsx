@@ -2,7 +2,9 @@
 import React from 'react';
 import { useHistory } from 'react-router';
 import { supabase } from '../supabaseClient';
-// import ErrorMesage from './ErrorMessage';
+import LoginButton from './LoginButton';
+import LogOutButton from './LogOutButton';
+import Profile from './Profile';
 
 const Dashboard = ({ session }) => {
   const history = useHistory();
@@ -27,6 +29,11 @@ const Dashboard = ({ session }) => {
       </p>
       <br />
       <button type="button" onClick={logOut}>LOG OUT</button>
+      <br />
+      <LoginButton />
+      <Profile />
+      <LogOutButton />
+
     </div>
   );
 };
