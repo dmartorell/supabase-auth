@@ -18,8 +18,6 @@ const App = () => {
   const [session, setSession] = useState(null);
 
   const [loading, setLoading] = useState(true);
-  console.log(loading);
-  console.log(session);
 
   useEffect(() => {
     setSession(supabase.auth.session());
@@ -30,6 +28,7 @@ const App = () => {
   }, []);
 
   useEffect(() => {
+    console.log('session changed');
     if (session) {
       setLoading(false);
     }

@@ -115,7 +115,10 @@ export default function SignIn({
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick={() => logIn(email, password, setMessage, history, setEmail, setPassword)}
+            onClick={() => {
+              logIn(email, password, setMessage, history, setEmail, setPassword);
+              setTimeout(() => history.push('/'), 2000);
+            }}
           >
             Sign In
           </Button>
